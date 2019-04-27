@@ -1,5 +1,17 @@
-.example-container {
+.container {
   width: 100%;
   height:100%;
-  border: 1px solid #555;
+  border-radius:5px;
+
+}
+
+.right-sidenav{
+  width:25%;
+  border-radius: 20px;
+  background-color: #3E5062;
+}
+.content{
+  width:75%;
+  border-radius: 20px;
+  background-color: #FFFFFF;
 }
