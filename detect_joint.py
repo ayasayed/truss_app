@@ -13,7 +13,7 @@ circles = cv2.HoughCircles(
     param1=50,
     param2=12,
     minRadius=1,
-    maxRadius=30
+    maxRadius=20
 )
 if not circles is None:
         circles = np.uint16(np.around(circles))
