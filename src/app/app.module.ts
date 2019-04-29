@@ -5,10 +5,17 @@ import { AppComponent } from './app.component';
 import { HeadComponent } from './head/head.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { MatTabsModule, MatSidenavModule, MatToolbarModule ,MatIconModule,MatListModule , MatButtonModule} from '@angular/material';
+import { MatTabsModule, MatMenuModule,MatSidenavModule, MatToolbarModule ,MatIconModule,MatListModule , MatButtonModule} from '@angular/material';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FixedsidnavComponent } from './fixedsidnav/fixedsidnav.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import {HttpClientModule} from '@angular/common/http';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import { ElementsComponent } from './elements/elements.component';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +23,11 @@ import { FixedsidnavComponent } from './fixedsidnav/fixedsidnav.component';
     HeadComponent,
     HeaderComponent,
     SidenavListComponent,
-    FixedsidnavComponent
+    FixedsidnavComponent,
+    AboutUsComponent,
+    UploadImageComponent,
+    ElementsComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -28,7 +39,10 @@ import { FixedsidnavComponent } from './fixedsidnav/fixedsidnav.component';
      MatToolbarModule,
      MatIconModule,
       MatButtonModule,
-      MatListModule
+      MatListModule,
+      HttpClientModule,
+      MatMenuModule,
+      FormsModule
   ],
   exports:[
     MatTabsModule,
@@ -36,7 +50,9 @@ import { FixedsidnavComponent } from './fixedsidnav/fixedsidnav.component';
      MatToolbarModule,
      MatIconModule,
      MatButtonModule,
-     MatListModule
+     MatListModule,
+     HttpClientModule,
+     MatMenuModule
     ],
 
   providers: [],
