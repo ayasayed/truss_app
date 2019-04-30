@@ -1,3 +1,14 @@
+//import {PythonShell} from 'python-shell';
+let {PythonShell} = require('python-shell');
+
+const spawn = require("child_process").spawn;
+const pythonProcess = spawn('python',["src/app/pre_process.py" ]);
+
+pythonProcess.stdout.on('data', (data) => {
+  // Do something with the data returned from python script DA FADY :D
+  console.log(data.toString());
+});
+/*
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
@@ -56,4 +67,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, function () {
   console.log('Node.js server is running on port ' + PORT);
-});
+});*/
