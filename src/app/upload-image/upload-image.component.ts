@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{ImageService}from "../image.service"
-import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';//node
+
 class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
@@ -16,7 +16,7 @@ const URL = 'http://localhost:3000/api/upload';
  export class UploadImageComponent  {
 
 
-//   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+
 
     selectedFile: ImageSnippet;
 
@@ -54,22 +54,3 @@ const URL = 'http://localhost:3000/api/upload';
       reader.readAsDataURL(file);
     }
   }
-//   ngOnInit() {
-
-//     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-//     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-
-//          console.log('ImageUpload:uploaded:', item, status, response);
-//           alert('File uploaded successfully');
-
-
-//      };
-
-
-//  }
-
-// }
-
-
-
-

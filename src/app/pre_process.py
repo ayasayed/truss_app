@@ -5,7 +5,7 @@ import numpy as np
 import sys
 ############################# Preprocessing part ##################################################
 
-imagee = cv2.imread('src/app/uploaded_photo.jpg', 1)
+imagee = cv2.imread(sys.argv[1], 1)
 print(imagee)
 print('Original Dimensions : ',imagee.shape)
 scale_percent = 20 # percent of original size
@@ -28,7 +28,5 @@ print('Resized Dimensions : ', image.shape)
 cv2.imwrite("after_pre2.jpg", image)
 
 
-
-
-print("hello")
+print(sys.argv[1])
 sys.stdout.flush()

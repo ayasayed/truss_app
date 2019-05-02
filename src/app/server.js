@@ -1,14 +1,5 @@
-//import {PythonShell} from 'python-shell';
+//import {PythonShell} from 'python-shell'
 let {PythonShell} = require('python-shell');
-
-const spawn = require("child_process").spawn;
-const pythonProcess = spawn('python',["src/app/pre_process.py" ]);
-
-pythonProcess.stdout.on('data', (data) => {
-  // Do something with the data returned from python script DA FADY :D
-  console.log(data.toString());
-});
-/*
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
@@ -25,7 +16,7 @@ let storage = multer.diskStorage({
       cb(null, DIR);
     },
     filename: (req, file, cb) => {
-      cb(null, name_photo= file.fieldname + '-' + Date.now() + '.' + path.extname(file.originalname));
+      cb(null, name_photo= file.fieldname + '-' + Date.now() +path.extname(file.originalname));
 
     }
 });
@@ -43,6 +34,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/api', function (req, res) {
+ 
   res.end('file catcher example');
 });
 
@@ -55,11 +47,21 @@ app.post('/api/upload',upload.single('image'), function (req, res) {
 
       } else {
         console.log('file received'+ ":" + name_photo);
+            /////python part
 
+            let {PythonShell} = require('python-shell');
 
+            const spawn = require("child_process").spawn;
+            const pythonProcess = spawn('python',["src/app/pre_process.py", name_photo]);
+
+            pythonProcess.stdout.on('data', (data) => {
+              // Do something with the data returned from python script DA FADY :D
+              console.log(data.toString());
+            });
+/////////////////////////////////////////////////////////////////////////
 return res.send({
           success: true
-        })
+        });
       }
 });
 
@@ -67,4 +69,17 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, function () {
   console.log('Node.js server is running on port ' + PORT);
-});*/
+});
+
+/////
+var http = require('http');
+
+
+http.createServer(function (req, res) {
+
+  res.writeHead(200, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
+  var data = JSON.stringify({"m":2,"n" :2});
+  res.end(data);
+
+}).listen(8080);
+console.log("Server running on port 8080.");

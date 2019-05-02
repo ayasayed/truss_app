@@ -1,5 +1,10 @@
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+<label >members</label>
+<div *ngFor="let item of members" class="input-group">
+  <span class="input-group-addon" id="basic-addon3">m{{item}}</span>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+</div>
+<label >members</label>
+<div *ngFor="let item of loads" class="input-group">
+  <span class="input-group-addon" id="basic-addon3">l{{item}}</span>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+</div>

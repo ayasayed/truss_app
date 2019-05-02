@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HeadComponent } from './head/head.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { MatTabsModule, MatMenuModule,MatSidenavModule, MatToolbarModule ,MatIconModule,MatListModule , MatButtonModule} from '@angular/material';
+import { MatTabsModule, MatMenuModule,MatFormFieldModule,MatSidenavModule, MatToolbarModule ,MatIconModule,MatListModule , MatButtonModule} from '@angular/material';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FixedsidnavComponent } from './fixedsidnav/fixedsidnav.component';
@@ -42,7 +42,8 @@ import { FormsModule } from '@angular/forms';
       MatListModule,
       HttpClientModule,
       MatMenuModule,
-      FormsModule
+      FormsModule,
+      MatFormFieldModule
   ],
   exports:[
     MatTabsModule,
@@ -52,7 +53,8 @@ import { FormsModule } from '@angular/forms';
      MatButtonModule,
      MatListModule,
      HttpClientModule,
-     MatMenuModule
+     MatMenuModule,
+     MatFormFieldModule
     ],
 
   providers: [],
