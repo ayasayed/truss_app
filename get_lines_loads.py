@@ -79,7 +79,7 @@ def get_lines_loads(image):
     print(len(lines))
     '''
     v , h =list_to_points(v_loads , h_loads)
-    return v,h
+    return v,h,len(lines)
 
 
     
