@@ -1,6 +1,25 @@
 import numpy as np
 import cv2
 
+def list_to_points(v_loads ,h_loads):
+    #get points of loads
+    v=[]
+    vv=[]
+    h=[]
+    hh=[]
+    for load in v_loads :
+        x, y, w, ha = cv2.boundingRect(load)
+        vv=[x,y]
+        v.append(vv)
+    #print(v)    
+    for load in h_loads :
+        x, y, w, ha = cv2.boundingRect(load)
+        hh=[x,y]
+        h.append(hh)
+    #print(h)
+    
+    return v,h
+
 def get_lines_loads(image):
     #preprocessing
     (thresh, im_bw) = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
@@ -45,7 +64,7 @@ def get_lines_loads(image):
     # classification of lines and loads
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        print(area)
+        #print(area)
         if (area < 200) :
             x, y, w, h = cv2.boundingRect(cnt)
             if (h>w):
@@ -59,11 +78,12 @@ def get_lines_loads(image):
     print(len(h_loads))
     print(len(lines))
     '''
-    return lines , v_loads ,h_loads
+    v , h =list_to_points(v_loads , h_loads)
+    return v,h
 
 
     
 img = cv2.imread('101.jpg')
-imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+#imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 img = getLines(img)
