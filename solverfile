@@ -1,0 +1,42 @@
+from anastruct import SystemElements
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+def unique_by_first_n(n, coll):
+    seen = set()
+    for item in coll:
+        compare = tuple(item[:n])    # Keep only the first `n` elements in the set
+        if compare not in seen:
+            seen.add(compare)
+            yield item
+
+ss = SystemElements(EA=5000)
+#draw members
+lines = np.loadtxt('guru99.txt', dtype=np.object)
+lines = lines.tolist()
+joints =[[0,0] , [5,0] , [10,0] , [3,4] , [8,4]]
+new_id=[]
+for line in lines :
+   ss.add_truss_element(location=[joints[int(line[0])], joints[int(line[1])]])
+   new_id.append(int(line[0]))
+   new_id.append(int(line[1]))
+print(new_id)
+list1=list(dict.fromkeys(new_id))
+print(list1)
+
+#draw supports
+supports = np.loadtxt('supports.txt', dtype=np.object)#read from files
+supports = supports.tolist()
+for support in supports:
+    #ss.add_support_hinged(node_id=(int(support)+1))
+    ss.add_support_hinged(node_id=1 + list1.index((int(support))))
+'''
+ss.point_load(Fx=10, node_id=2)
+'''
+fig = ss.show_structure(show=True)
+plt.title('A sine wave')
+plt.savefig('my-figure.png')
+
+#ss.solve()
+#ss.show_displacement(factor=2)
+#ss.show_bending_moment()
