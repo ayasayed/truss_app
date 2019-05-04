@@ -1,3 +1,25 @@
+
+############################## loads ##################################
+def list_to_points(v_loads ,h_loads):
+    #get points of loads
+    v=[]
+    vv=[]
+    h=[]
+    hh=[]
+    for load in v_loads :
+        x, y, w, ha = cv2.boundingRect(load)
+        vv=[x,y]
+        v.append(vv)
+    #print(v)
+    for load in h_loads :
+        x, y, w, ha = cv2.boundingRect(load)
+        hh=[x,y]
+        h.append(hh)
+    #print(h)
+
+
+    return v,h
+
 def get_lines_loads(image):
     #preprocessing
     (thresh, im_bw) = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
@@ -31,7 +53,7 @@ def get_lines_loads(image):
     contours, h = cv2.findContours(new, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
     for c in contours :
-        print(cv2.contourArea(c))
+        #print(cv2.contourArea(c))
         if cv2.contourArea(c) < 50 :
            contours.remove(c)
     #remove max contour
@@ -47,7 +69,7 @@ def get_lines_loads(image):
     
     '''
     cv2.drawContours(image, contours, -1, (0,255,0), 3)
-    print(len(contours))
+    #print(len(contours))
     cv2.imshow("new image",image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -68,9 +90,9 @@ def get_lines_loads(image):
         else :
             lines.append(cnt)
     
-    print(len(v_loads))
-    print(len(h_loads))
-    print(len(lines))
+    #print(len(v_loads))
+    #print(len(h_loads))
+    #print(len(lines))
     #print(image.shape[0])
     imgg = np.zeros((image.shape[0],image.shape[1],3), np.uint8)#for sub =img_rgb -img2
     img2=cv2.bitwise_not(imgg)
@@ -83,10 +105,11 @@ def get_lines_loads(image):
         cv2.circle(img2,(x,y), 3*h , (0,0,0), -1)
     img2 = cv2.bitwise_not(img2)
     
-    i =cv2.bitwise_not(im_bw) - img2
+    lines =newimage- img2
+    i=cv2.bitwise_not(im_bw)- img2
     i = cv2.bitwise_not(i)
     cv2.imshow("new image",i)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     v , h =list_to_points(v_loads , h_loads)
-    return i,v,h
+    return i,cv2.bitwise_not(lines),v,h
