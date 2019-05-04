@@ -57,7 +57,9 @@ import { FormsModule } from '@angular/forms';
      MatFormFieldModule
     ],
 
-  providers: [],
+  providers: [
+    UploadImageComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

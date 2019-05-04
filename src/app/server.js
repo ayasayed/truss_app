@@ -1,4 +1,3 @@
-//import {PythonShell} from 'python-shell'
 let {PythonShell} = require('python-shell');
 const path = require('path');
 const fs = require('fs');
@@ -9,6 +8,9 @@ const app = express();
 const router = express.Router();
 
 const DIR = '';
+let  com ='';
+
+
 
 let name_photo="";
 let storage = multer.diskStorage({
@@ -33,10 +35,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/api', function (req, res) {
- 
-  res.end('file catcher example');
-});
+
 
 app.post('/api/upload',upload.single('image'), function (req, res) {
     if (!req.file) {
@@ -47,6 +46,7 @@ app.post('/api/upload',upload.single('image'), function (req, res) {
 
       } else {
         console.log('file received'+ ":" + name_photo);
+
             /////python part
 
             let {PythonShell} = require('python-shell');
@@ -56,12 +56,21 @@ app.post('/api/upload',upload.single('image'), function (req, res) {
 
             pythonProcess.stdout.on('data', (data) => {
               // Do something with the data returned from python script DA FADY :D
-              console.log(data.toString());
+              com=data.toString();
+              app.get('/api/upload', function (req, res){
+                res.write(JSON.stringify({"m":com.slice(1,com.indexOf(",")),"n":com.slice(com.indexOf(",")+2,com.indexOf("]"))}));
+                res.end();
+              });
+              console.log(com);
+
+
             });
+
 /////////////////////////////////////////////////////////////////////////
 return res.send({
           success: true
-        });
+          });
+
       }
 });
 
@@ -72,14 +81,4 @@ app.listen(PORT, function () {
 });
 
 /////
-var http = require('http');
 
-
-http.createServer(function (req, res) {
-
-  res.writeHead(200, { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' });
-  var data = JSON.stringify({"m":2,"n" :2});
-  res.end(data);
-
-}).listen(8080);
-console.log("Server running on port 8080.");

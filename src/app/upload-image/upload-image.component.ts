@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import{ImageService}from "../image.service"
 
 class ImageSnippet {
@@ -13,12 +13,14 @@ const URL = 'http://localhost:3000/api/upload';
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.scss']
 })
+@Injectable()
  export class UploadImageComponent  {
 
 
 
 
-    selectedFile: ImageSnippet;
+  public  selectedFile: ImageSnippet;
+  public com:any;
 
     constructor(private imageService: ImageService){}
 
@@ -45,12 +47,15 @@ const URL = 'http://localhost:3000/api/upload';
         this.imageService.uploadImage(this.selectedFile.file).subscribe(
           (res) => {
             this.onSuccess();
-          },
+            setTimeout(()=>{this.imageService.reqcom()},1000);//1sec
+
+         },
           (err) => {
             this.onError();
           })
       });
 
       reader.readAsDataURL(file);
+
     }
-  }
+ }

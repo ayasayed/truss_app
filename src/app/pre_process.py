@@ -1,13 +1,12 @@
-
-###############################################################
 import cv2
 import numpy as np
 import sys
+from random import randint
 ############################# Preprocessing part ##################################################
 
 imagee = cv2.imread(sys.argv[1], 1)
-print(imagee)
-print('Original Dimensions : ',imagee.shape)
+#print(imagee)
+#print('Original Dimensions : ',imagee.shape)
 scale_percent = 20 # percent of original size
 width = int(imagee.shape[1] * scale_percent / 100)
 height = int(imagee.shape[0] * scale_percent / 100)
@@ -24,9 +23,14 @@ t = cv2.fastNlMeansDenoising(erosion, None, 20, 21, 7)  # remove some noise and 
 image = cv2.medianBlur(image,5)
 ret,image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)
 
-print('Resized Dimensions : ', image.shape)
+#print('Resized Dimensions : ', image.shape)
 cv2.imwrite("after_pre2.jpg", image)
 
+m=randint(1,3)
 
-print(sys.argv[1])
+n=randint(1,3)
+
+command=[m,n]
+
+print(command)
 sys.stdout.flush()
