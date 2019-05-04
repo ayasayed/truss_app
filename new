@@ -124,7 +124,7 @@ def get_lines_loads(image):
 
     i =cv2.bitwise_not(im_bw) - img2
     i = cv2.bitwise_not(i)
-    cv2.imshow("new image",i)
+    #cv2.imshow("new image",i)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
     v , h =list_to_points(v_loads , h_loads)
@@ -200,7 +200,7 @@ def unique_by_first_n(n, coll):
             yield item
 
 ######################################main#################################################
-img_rgb = cv2.imread('truss166.png')####original image
+img_rgb = cv2.imread('trusss177.png')####original image
 img_rgb=pre (img_rgb)
 ################call loads fn#######################################
 i,v,h=get_lines_loads(img_rgb)
@@ -241,7 +241,7 @@ for support in supports:
   y=int(circles[0][index_mindis][1])
   triangle_cnt = np.array( [(x, y), (x+10,y+20), (x-10 ,y+20)] )
   cv2.drawContours(fimg2, [triangle_cnt], 0, (0,0,0), -1)
-print(final_supports_index)
+  #print("final_supports_index",final_supports_index)
 np.savetxt('supports.txt',final_supports_index, fmt='%s')
 #cv2.imshow('new',fimg2)#joints and support
 ######################################joint & lines#################################################
@@ -276,7 +276,7 @@ for line in lines:
 filter_final_lines_index= list(unique_by_first_n(2, final_lines_index))
 #print(filter_final_lines_index)
 np.savetxt('guru99.txt', filter_final_lines_index, fmt='%s')
-cv2.imshow('joint&supports&lines.jpg',fimg2)
+#cv2.imshow('joint&supports&lines.jpg',fimg2)
 filtered_lines = list(unique_by_first_n(4, final_lines))
 ####################################loads &joints###########################################
 v_loads=[]
@@ -286,17 +286,36 @@ h_loads_final=[]
 temp_load=[]
 v_loads=v
 h_loads=h
+final_v_loads_index=[]
+final_h_loads_index=[]
 for load in v_loads :
     for joint in circles [0,:]:
         d =math.sqrt( ((load [0]-joint[0])**2)+((load [1]-joint[1])**2) )
         dist.append(d)
     index_mindis=dist.index(min(dist))
     dist.clear()
+    final_v_loads_index.append(index_mindis)
     x=int(circles[0][index_mindis][0])
     y=int(circles[0][index_mindis][1])
     temp_load=[x,y]
     v_loads_final.append(temp_load)
-    cv2.arrowedLine(fimg2, (x,y), (x,y+20), (0,0,255), 5)
+    cv2.arrowedLine(fimg2, (x-20,y), (x,y), (0,0,255), 4)
+#print(final_v_loads_index)
+np.savetxt('v_loads.txt',final_v_loads_index, fmt='%s')
+for load in h_loads :
+    for joint in circles [0,:]:
+        d =math.sqrt( ((load [0]-joint[0])**2)+((load [1]-joint[1])**2) )
+        dist.append(d)
+    index_mindis=dist.index(min(dist))
+    dist.clear()
+    final_h_loads_index.append(index_mindis)
+    x=int(circles[0][index_mindis][0])
+    y=int(circles[0][index_mindis][1])
+    temp_load=[x,y]
+    h_loads_final.append(temp_load)
+    cv2.arrowedLine(fimg2, (x,y-20), (x,y), (0,0,255), 4)
+#print(final_h_loads_index)
+np.savetxt('h_loads.txt',final_h_loads_index, fmt='%s')
 cv2.imshow('loads.jpg',fimg2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
