@@ -1,6 +1,6 @@
  <div class="panel panel-default">
 <div  >
-  <div style="text-align:center;font-size:50px; ">Welcome to 2D Structure Analyzer</div>
+  <div class="welcome">Welcome to 2D Structure Analyzer</div>
 <label class="image-upload-container btn btn-bwm">
     <span>Select Image</span>
     <input #imageInput
@@ -20,6 +20,7 @@
   <div class="img-spinning-circle"></div>
 </div>
 
-<div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
-<div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
 <div>
+  <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+  <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>

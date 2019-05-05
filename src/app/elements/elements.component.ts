@@ -23,6 +23,8 @@ nodeLocation:any=[];
 loadvalue:any=[];
  public list_ml(n:Number,m:any[]){
   m.length=0;
+
+
   this.nodeLocation.length=0;
   this.loadvalue.length=0;
   for( let i=0;i<n;i++){
@@ -32,8 +34,6 @@ loadvalue:any=[];
 
  onEntern(value: string,i) {
    this.nodeLocation[i] =value;
-
-   //document.getElementById("mem").nodeValue="0";
 }
 onEnterl(value: string,i) {
   this.loadvalue[i] = value;
@@ -56,6 +56,7 @@ if(this.nodeLocation.length== this.members.length&&this.loadvalue.length== this.
   this.http.post("http://localhost:3000", body).subscribe(res =>console.log("done"));
   this.http.post("http://localhost:3000/api", body2).subscribe(res =>console.log("done"));
   this.flag=true;
+
   }else{alert("please input all missing fields");}
 
 }
